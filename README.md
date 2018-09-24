@@ -18,10 +18,14 @@ Supported features:
   - Try
 
 To do:
-- Input from file
+- <strike>Input from file</strike>
+- Keep version number up-to-date
 - Output to file
 - Review code
-- Interpret all keywords
+- Comment all classes, methods, properties, and code (this, when appropriate)
+- Convert all keywords
 - Interpret all variable and parameter types
+- Display all variables (end of file?)
 - GUI
 - Multiple options for output (e.g. plain text, HTML table, CVS, simplified XML)
+- Create a Code Collaborator plug-in based on this code base
