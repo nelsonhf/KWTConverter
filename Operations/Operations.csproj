@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppendLogFolder.cs" />
     <Compile Include="CallKWT.cs" />
     <Compile Include="CallLibrary.cs" />
     <Compile Include="CallScript.cs" />
@@ -51,11 +52,13 @@
     <Compile Include="Delay.cs" />
     <Compile Include="Else.cs" />
     <Compile Include="Factory.cs" />
+    <Compile Include="Finally.cs" />
     <Compile Include="For.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="If.cs" />
     <Compile Include="LogError.cs" />
     <Compile Include="Operations.cs" />
+    <Compile Include="PopLogFolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Return.cs" />
     <Compile Include="SetVariable.cs" />

@@ -33,7 +33,7 @@ namespace TestComplete
 
                 var result = PaddedOperationName(level);
                 result = PadToColumn(result, ParametersColumn);
-                result += $"{Indent(level)}{OperationName} {name}, {From}, {To}, {Step}\n";
+                result += $"{name}, {From}, {To}, {Step}\n";
                 foreach (var c in Children)
                 {
                     result += c.Display(level + 1);

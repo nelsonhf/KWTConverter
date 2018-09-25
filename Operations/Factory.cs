@@ -51,6 +51,10 @@ namespace TestComplete
                             return new Catch(opData, children);
                         // break;
 
+                        case OperTypes.Finally:
+                            return new Finally(opData, children);
+                        // break;
+
                         case OperTypes.Group:
                             return new Group(opData, children);
                         // break;
@@ -89,6 +93,14 @@ namespace TestComplete
 
                         case OperTypes.CallScript:
                             return new CallScript(opData, children);
+                            // break;
+
+                        case OperTypes.AppendLogFolder:
+                            return new AppendLogFolder(opData, children);
+                            // break;
+
+                        case OperTypes.PopLogFolder:
+                            return new PopLogFolder(opData, children);
                             // break;
 
                         default:

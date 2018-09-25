@@ -27,6 +27,16 @@ namespace TestComplete
             var variables = doc.Element("Root").Element("Variables").Element("Items").Elements();
             var operations = doc.Element("Root").Element("TestData").Element("Children").Elements();
 
+            var allVars = new List<Variable>();
+            foreach (var v in variables)
+            {
+                allVars.Add(Variables.Factory.BuildVariable(v));
+            }
+
+#if false
+            allVars.Dump();
+            variables.Dump();
+#endif
             var program = new List<Operation>();
             string prog = string.Empty;
             foreach (var o in operations)
@@ -36,19 +46,6 @@ namespace TestComplete
                 prog += operation.Display(0);
                 Console.WriteLine(operation.Display(0));
             }
-
-#if false
-            var allVars = new List<Variable>();
-            //var testCommands = ???
-
-            foreach (var v in variables)
-            {
-                allVars.Add(Variables.Factory.BuildVariable(v));
-            }
-
-            allVars.Dump();
-            variables.Dump();
-#endif
         }
     }
 }
