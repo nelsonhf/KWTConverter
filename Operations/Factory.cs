@@ -19,7 +19,17 @@ namespace TestComplete
                 }
                 else
                 {
-                    OperTypes type = Operation.Operations[new Guid(data.Attribute("Type").Value)];
+                    var t = new Guid(data.Attribute("Type").Value);
+                    OperTypes type;
+                    if (Operation.Operations.ContainsKey(t))
+                    {
+                        type = Operation.Operations[t];
+                    }
+                    else
+                    {
+                        type = OperTypes.Unknown;
+                    }
+
                     XElement opData = data.Element("Data");
                     XElement children = data.Element("Children");
 
