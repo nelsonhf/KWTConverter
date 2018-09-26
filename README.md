@@ -20,7 +20,7 @@ Supported features:
 To do:
 - <strike>Input from file</strike>
 - Keep version number up-to-date
-- Output to file
+- <strike>Output to file</strike>
 - Review code
 - Comment all classes, methods, properties, and code (this, when appropriate)
 - Convert all keywords
