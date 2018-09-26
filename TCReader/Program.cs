@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,22 @@ namespace TestComplete
                 Console.WriteLine(m_usage);
                 return;
             }
-            var filename = args[0];
 
-            var doc = XDocument.Load(filename);
+            var input = args[0];
+            var dir = Path.GetDirectoryName(input);
+            if (dir == string.Empty)
+            {
+                dir = "."; // If in "current directory", would have empty string. Use "." instead.
+            }
+
+            var filename = Path.GetFileNameWithoutExtension(input) + ".out";
+            var slash = Path.DirectorySeparatorChar;
+            var output = $"{dir}{slash}{filename}";
+
+            File.Create(output).Close();
+            var streamWriter = new StreamWriter(output);
+
+            var doc = XDocument.Load(input);
             var variables = doc.Element("Root").Element("Variables").Element("Items").Elements();
             var operations = doc.Element("Root").Element("TestData").Element("Children").Elements();
 
@@ -44,8 +58,11 @@ namespace TestComplete
                 var operation = Operations.Factory.BuildOperation(o);
                 program.Add(operation);
                 prog += operation.Display(0);
-                Console.WriteLine(operation.Display(0));
+                //// Console.WriteLine(operation.Display(0));
             }
+
+            Console.WriteLine(prog);
+            streamWriter.WriteLine(prog);
         }
     }
 }

@@ -29,6 +29,7 @@ namespace TestComplete
             Finally,
             AppendLogFolder,
             PopLogFolder,
+            Unknown,
         };
 
         public class Operation
