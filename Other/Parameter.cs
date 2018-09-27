@@ -17,17 +17,18 @@ namespace TestComplete
         public Guid? ParamTypeGuid { get; private set; }
         public string Value { get; private set; }
         public string VarName { get; private set; }
-        public string ValueType { get; private set; }
+        public int? ValueType { get; private set; }
 
         public Parameter(XElement data)
         {
             Expression = data.Attribute("Expression")?.Value;
-            Name = data.Attribute("Name").Value;
+            Name = data.Attribute("Name")?.Value;
             ParamType = data.Attribute("ParamType")?.Value;
             ParamTypeGuid = ParamType == null ? (Guid?)null : new Guid(ParamType);
             Value = data.Attribute("ValueValue")?.Value;
             VarName = data.Attribute("VariableName")?.Value;
-            ValueType = data.Attribute("ValueType")?.Value;
+            var vt = data.Attribute("ValueType")?.Value;
+            ValueType = vt == null ? (int?)null : int.Parse(vt);
         }
 
         public override string ToString()
@@ -56,11 +57,11 @@ namespace TestComplete
                     return UnknownValue;
                 }
             }
-            else if (ValueType == "1" || ValueType =="7") // integer, boolean; 
+            else if (ValueType == (int)Variable.ValueType.Integer || ValueType == (int)Variable.ValueType.Boolean)
             {
                 return Value;
             }
-            else if (ValueType == "6" && !Value.StartsWith("[KeywordTests")) // string; "[KeywordTests.." seems to indicate a reference to a variable or array
+            else if (ValueType == (int)Variable.ValueType.String && !Value.StartsWith("[KeywordTests")) // "[KeywordTests.." seems to indicate a reference to a variable or array
             {
                 return $"\"{Value}\"";
             }
