@@ -27,16 +27,7 @@ namespace TestComplete
                 return;
             }
 
-            var dir = Path.GetDirectoryName(input);
-            if (dir == string.Empty)
-            {
-                dir = "."; // If in "current directory", would have empty string. Use "." instead.
-            }
-
-            var filename = Path.GetFileNameWithoutExtension(input) + ".out";
-            var slash = Path.DirectorySeparatorChar;
-            var output = $"{dir}{slash}{filename}";
-
+            var output = Path.ChangeExtension(input, "out");
             File.Create(output).Close();
             var streamWriter = new StreamWriter(output);
 
@@ -67,6 +58,7 @@ namespace TestComplete
 
             Console.WriteLine(prog);
             streamWriter.WriteLine(prog);
+            streamWriter.Close();
         }
     }
 }
