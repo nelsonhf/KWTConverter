@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using TestComplete.Operations;
 using TestComplete.Variables;
@@ -12,18 +9,24 @@ namespace TestComplete
 {
     public class Program
     {
-        private const string m_usage =  "Usage:\n" +
+        private const string MUsage =  "Usage:\n" +
                                         "KWTConverter <filename>\n" +
                                         "   where filename is the filename to convert, e.g. test.tcKDTest\n";
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (args.Length != 1)
             {
-                Console.WriteLine(m_usage);
+                Console.WriteLine(MUsage);
                 return;
             }
 
             var input = args[0];
+            if (!File.Exists(input))
+            {
+                Console.WriteLine("Filename: {0} does not exist or cannot be accessed.", input);
+                return;
+            }
+
             var dir = Path.GetDirectoryName(input);
             if (dir == string.Empty)
             {
@@ -38,8 +41,9 @@ namespace TestComplete
             var streamWriter = new StreamWriter(output);
 
             var doc = XDocument.Load(input);
-            var variables = doc.Element("Root").Element("Variables").Element("Items").Elements();
-            var operations = doc.Element("Root").Element("TestData").Element("Children").Elements();
+            // Using Null-conditional Operators (oh we fancy)
+            var variables = doc.Element("Root")?.Element("Variables")?.Element("Items")?.Elements();
+            var operations = doc.Element("Root")?.Element("TestData")?.Element("Children")?.Elements();
 
             var allVars = new List<Variable>();
             foreach (var v in variables)
