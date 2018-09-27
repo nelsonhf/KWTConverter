@@ -61,11 +61,11 @@ namespace TestComplete
 
             public override string Display(int level)
             {
-                var message = m_parameters.Where(p => p.Name == "MessageText").FirstOrDefault()?.ToString();
-                var addInfo = m_parameters.Where(p => p.Name == "AdditionalInformation").FirstOrDefault()?.ToString();
+                Parameter message = m_parameters.FirstOrDefault(n => n.Name == "MessageText");
+                Parameter addInfo = m_parameters.FirstOrDefault(n => n.Name == "AdditionalInformation");
                 var result = PaddedOperationName(level);
                 result = PadToColumn(result, ParametersColumn);
-                result += $"\"{message}\", \"{addInfo}\"";
+                result += $"{message}, {addInfo}";
 
                 if (Description != null)
                 {

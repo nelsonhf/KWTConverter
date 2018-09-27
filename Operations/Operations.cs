@@ -51,7 +51,7 @@ namespace TestComplete
 	            { new Guid("{60B8EBE8-9B0C-4A7B-A452-229144AEA05B}"), OperTypes.For },
                 { new Guid("{DA0842B1-F222-4746-8498-4933E5527E0A}"), OperTypes.Catch },
 	            { new Guid("{4B9A062D-45FB-439D-AF18-13015DA3B9FA}"), OperTypes.Finally },
-	            { new Guid("{90F89436-9452-4F95-9882-6B5210079F13}"), OperTypes.AppendLogFolder },
+	            { new Guid("{28D3E73B-A718-4E67-96A3-4C49D5D4B340}"), OperTypes.AppendLogFolder },
 	            { new Guid("{56B7409E-809F-4569-B55F-35534DDD66FF}"), OperTypes.PopLogFolder },
 	            //	{ new Guid(), OperTypes. },
 	            //	{ new Guid(), OperTypes. },
