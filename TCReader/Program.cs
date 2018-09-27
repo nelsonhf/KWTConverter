@@ -33,8 +33,8 @@ namespace TestComplete
 
             var doc = XDocument.Load(input);
             // Using Null-conditional Operators (oh we fancy)
-            var variables = doc.Element("Root")?.Element("Variables")?.Element("Items")?.Elements();
-            var operations = doc.Element("Root")?.Element("TestData")?.Element("Children")?.Elements();
+            var variables = doc.Element("Root")?.Element("Variables")?.Element("Items")?.Elements() ?? new List<XElement>();
+            var operations = doc.Element("Root")?.Element("TestData")?.Element("Children")?.Elements() ?? new List<XElement>();
 
             var allVars = new List<Variable>();
             foreach (var v in variables)
@@ -58,7 +58,7 @@ namespace TestComplete
 
             Console.WriteLine(prog);
             streamWriter.WriteLine(prog);
-            streamWriter.Close();
+            streamWriter.Flush();
         }
     }
 }

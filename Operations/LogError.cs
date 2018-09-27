@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace TestComplete
@@ -37,11 +34,11 @@ namespace TestComplete
 
             public override string Display(int level)
             {
-                var description = m_parameters.FirstOrDefault(n => n.Name == "MessageText")?.Value ?? string.Empty;
-                var additInfo = m_parameters.FirstOrDefault(n => n.Name == "AdditionalInformation")?.Value ?? string.Empty;
+                Parameter description = m_parameters.FirstOrDefault(n => n.Name == "MessageText");
+                Parameter additInfo = m_parameters.FirstOrDefault(n => n.Name == "AdditionalInformation");
                 var result = PaddedOperationName(level);
                 result = PadToColumn(result, ParametersColumn);
-                result += $"\"{description}\", \"{additInfo}\"\n";
+                result += $"{description}, {additInfo}\n";
                 return result;
             }
         }

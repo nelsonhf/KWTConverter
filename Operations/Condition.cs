@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace TestComplete
@@ -13,10 +11,27 @@ namespace TestComplete
         {
             public string Value { get; private set; }
 
+            public readonly Dictionary<OperatorType, Type> OperatorMap = new Dictionary<OperatorType, Type>
+            {
+                { OperatorType.Logical, typeof(LogicalOperator) },
+                { OperatorType.Equality, typeof(EqualityOperator) },
+            };
+
             public enum OperatorType
             {
-                Or = 0,
-                Equals = 1,
+                Logical = 0,
+                Equality = 1,
+            };
+
+            public enum LogicalOperator
+            {
+                Or = 1,
+            };
+
+            public enum EqualityOperator
+            {
+                Equals = 0,
+                DoesNotEqual = 1,
             };
 
             public Condition(XElement root)
@@ -53,7 +68,16 @@ namespace TestComplete
                     right = "(" + WalkTree(branch.Elements("Expression").Skip(1).First()) + ")";
                 }
 
-                oper = Enum.GetName(typeof(OperatorType), int.Parse(branch.Attribute("Type").Value)) ?? "????";
+                int t = int.Parse(branch.Attribute("Type").Value);
+                if (Enum.IsDefined(typeof(OperatorType), t))
+                {
+                    Type type = OperatorMap[(OperatorType)t];
+                    oper = Enum.GetName(type, int.Parse(branch.Attribute("Operator").Value));
+                }
+                else
+                {
+                    oper = "????";
+                }
 
                 return $"{left} {oper} {right}";
             }

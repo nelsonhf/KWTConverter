@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using TestComplete.Variables;
 
@@ -57,9 +54,17 @@ namespace TestComplete
                     return UnknownValue;
                 }
             }
+            else if (ValueType == (int)Variable.ValueType.Null)
+            {
+                return "null";
+            }
             else if (ValueType == (int)Variable.ValueType.Integer || ValueType == (int)Variable.ValueType.Boolean)
             {
                 return Value;
+            }
+            else if (ValueType == (int)Variable.ValueType.UnicodeString)
+            {
+                return $"\"{Table.DecodeUnicodeString(Value)}\"";
             }
             else if (ValueType == (int)Variable.ValueType.String && !Value.StartsWith("[KeywordTests")) // "[KeywordTests.." seems to indicate a reference to a variable or array
             {

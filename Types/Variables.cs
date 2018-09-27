@@ -40,9 +40,11 @@ namespace TestComplete
             // Attribute of <Parameter>, usually when attributes VarType and ValueValue are present
             public enum ValueType
             {
+                Null = 0,
                 Integer = 1,
                 String = 6,
                 Boolean = 7,
+                UnicodeString = 9,
             };
 
              // Attribute of <Parameter>, usually when attribute DefValueValue is present
