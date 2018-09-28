@@ -3,19 +3,29 @@ Converts a TestComplete KeyWordTest file from XML to text
 
 Supported features:
 - Keywords:
+  - Append Log Folder
   - Run KeywordTest
   - Run external library function
   - Run Script
   - Catch
   - Comment
   - Data-Driven Loop
+  - Delay
+  - Finally
   - If/Else
   - For Loop
   - Group
   - Log.Error
+  - Pop Log Folder
   - Return
   - Set Variable Value
   - Try
+- Variable Types:
+  - Null
+  - Integer
+  - String
+  - Boolean
+  - Unicode String
 
 To do:
 - <strike>Input from file</strike>
