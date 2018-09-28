@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace TestComplete
@@ -13,7 +9,7 @@ namespace TestComplete
         {
             public static Variable BuildVariable(XElement data)
             {
-                string name = data.Attribute("Name").ToString();
+                string name = data.Attribute("Name")?.ToString();
                 VarTypes type = Variable.TypeFromGuid[new Guid(data.Attribute("Type").Value)];
                 string description = data.Attribute("Descr")?.Value;
                 XElement def = data.Element("DefValue");

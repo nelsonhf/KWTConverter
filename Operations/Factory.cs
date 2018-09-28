@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace TestComplete
@@ -19,94 +16,34 @@ namespace TestComplete
                 }
                 else
                 {
-                    var t = new Guid(data.Attribute("Type").Value);
-                    OperTypes type;
-                    if (Operation.Operations.ContainsKey(t))
-                    {
-                        type = Operation.Operations[t];
-                    }
-                    else
-                    {
-                        type = OperTypes.Unknown;
-                    }
+                    var t = new Guid(data.Attribute("Type")?.Value);
+                    var type = Operation.Operations.ContainsKey(t) ? Operation.Operations[t] : OperTypes.Unknown;
 
                     XElement opData = data.Element("Data");
                     XElement children = data.Element("Children");
 
-                    switch (type)
+                    var operTypeToOperation = new Dictionary<OperTypes, Operation>()
                     {
-                        case OperTypes.Comment:
-                            return new Comment(opData, children);
-                        // break;
+                        { OperTypes.Comment,          new Comment(opData, children) },
+                        { OperTypes.CallKWT,          new CallKWT(opData, children) },
+                        { OperTypes.Try,              new Try(opData, children) },
+                        { OperTypes.Catch,            new Catch(opData, children) },
+                        { OperTypes.Finally,          new Finally(opData, children) },
+                        { OperTypes.Group,            new Group(opData, children) },
+                        { OperTypes.SetVariable,      new SetVariable(opData, children) },
+                        { OperTypes.If,               new If(opData, children) },
+                        { OperTypes.LogError,         new LogError(opData, children) },
+                        { OperTypes.Return,           new Return(opData, children) },
+                        { OperTypes.Else,             new Else(opData, children) },
+                        { OperTypes.Delay,            new Delay(opData, children) },
+                        { OperTypes.For,              new For(opData, children) },
+                        { OperTypes.DataDrivenTest,   new DataDrivenTest(opData, children) },
+                        { OperTypes.CallScript,       new CallScript(opData, children) },
+                        { OperTypes.AppendLogFolder,  new AppendLogFolder(opData, children) },
+                        { OperTypes.PopLogFolder,     new PopLogFolder(opData, children) },
+                    };
 
-                        case OperTypes.CallKWT:
-                            return new CallKWT(opData, children);
-                        // break;
-
-                        case OperTypes.Try:
-                            return new Try(opData, children);
-                        // break;
-
-                        case OperTypes.Catch:
-                            return new Catch(opData, children);
-                        // break;
-
-                        case OperTypes.Finally:
-                            return new Finally(opData, children);
-                        // break;
-
-                        case OperTypes.Group:
-                            return new Group(opData, children);
-                        // break;
-
-                        case OperTypes.SetVariable:
-                            return new SetVariable(opData, children);
-                        // break;
-
-                        case OperTypes.If:
-                            return new If(opData, children);
-                        // break;
-
-                        case OperTypes.LogError:
-                            return new LogError(opData, children);
-                            // break;
-
-                        case OperTypes.Return:
-                            return new Return(opData, children);
-                            // break;
-
-                        case OperTypes.Else:
-                            return new Else(opData, children);
-                            // break;
-
-                        case OperTypes.Delay:
-                            return new Delay(opData, children);
-                            // break;
-
-                        case OperTypes.For:
-                            return new For(opData, children);
-                            // break;
-
-                        case OperTypes.DataDrivenTest:
-                            return new DataDrivenTest(opData, children);
-                            // break;
-
-                        case OperTypes.CallScript:
-                            return new CallScript(opData, children);
-                            // break;
-
-                        case OperTypes.AppendLogFolder:
-                            return new AppendLogFolder(opData, children);
-                            // break;
-
-                        case OperTypes.PopLogFolder:
-                            return new PopLogFolder(opData, children);
-                            // break;
-
-                        default:
-                            return new Operation("Unknown", type, opData, children);
-                            // break;
-                    }
+                    return operTypeToOperation.ContainsKey(type) ? operTypeToOperation[type] : new Operation("Unknown", type, opData, children);
                 }
             }
         }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using TestComplete;
 
 namespace TestComplete
 {
@@ -40,15 +36,10 @@ namespace TestComplete
                     m_parameters.Add(new Parameter(p));
                 }
 
-                Name = data.Attribute("TestName").Value;
-                if (data.Attribute("DescriptionEdited")?.Value == "True")
-                {
-                    Description = data.Attribute("Description")?.Value;
-                }
-                else
-                {
-                    Description = null;
-                }
+                Name = data.Attribute("TestName")?.Value;
+                Description = data.Attribute("DescriptionEdited")?.Value == "True"
+                    ? data.Attribute("Description")?.Value
+                    : null;
             }
 
             public override string Display(int level)

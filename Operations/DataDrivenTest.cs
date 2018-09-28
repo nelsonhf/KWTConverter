@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace TestComplete
@@ -19,13 +15,13 @@ namespace TestComplete
             public int Last { get; private set; }
             public DataDrivenTest(XElement data, XElement children) : base("Data-Driven Loop", OperTypes.DataDrivenTest, data, children)
             {
-                DataTableName = data.Attribute("VariableName").Value;
-                DataTableType = data.Attribute("VariableType").Value;
+                DataTableName = data.Attribute("VariableName")?.Value;
+                DataTableType = data.Attribute("VariableType")?.Value;
                 var records = data.Element("Records");
                 FromBegin = bool.Parse(records.Attribute("FromBegin").Value);
-                ToEnd = bool.Parse(records.Attribute("ToEnd").Value);
-                First = int.Parse(records.Attribute("StartRecord").Value);
-                Last = int.Parse(records.Attribute("StopIndex").Value);
+                ToEnd = bool.Parse(records.Attribute("ToEnd")?.Value);
+                First = int.Parse(records.Attribute("StartRecord")?.Value);
+                Last = int.Parse(records.Attribute("StopIndex")?.Value);
             }
 
             public override string Display(int level)

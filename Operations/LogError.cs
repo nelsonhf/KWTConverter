@@ -22,14 +22,9 @@ namespace TestComplete
                 }
 
                 MessageType = data.Attribute("MessageType")?.Value;
-                if (data.Attribute("DescriptionEdited")?.Value == "True")
-                {
-                    Description = data.Attribute("Description")?.Value;
-                }
-                else
-                {
-                    Description = null;
-                }
+                Description = data.Attribute("DescriptionEdited")?.Value == "True" 
+                    ? data.Attribute("Description")?.Value 
+                    : null;
             }
 
             public override string Display(int level)

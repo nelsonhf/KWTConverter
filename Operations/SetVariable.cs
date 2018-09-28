@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using TestComplete.Variables;
 
@@ -25,7 +22,7 @@ namespace TestComplete
                     m_parameters.Add(new Parameter(p));
                 }
 
-                VariableName = data.Attribute("VariableName").Value;
+                VariableName = data.Attribute("VariableName")?.Value;
                 var typenumber = int.Parse(data.Attribute("VariableType").Value);
                 VariableType = Variable.TypeFromNumber[typenumber];
             }

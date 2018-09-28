@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 namespace TestComplete
 {
@@ -17,18 +11,16 @@ namespace TestComplete
 
             public static Operation MakeLibrary(XElement operation, XElement data)
             {
-                var moniker = operation.Attribute("Moniker").Value;
-                var stringId = operation.Attribute("StringID").Value;
+                var moniker = operation.Attribute("Moniker")?.Value;
+                var stringId = operation.Attribute("StringID")?.Value;
 
                 // I only know about this library.
-                if (moniker.Contains("CheckpointsAssertion"))
+                if (moniker != null && moniker.Contains("CheckpointsAssertion"))
                 {
                     return new CheckpointsAssertion(moniker, stringId, data);
                 }
-                else
-                {
-                    return null;
-                }
+
+                return null;
             }
         }
     }
