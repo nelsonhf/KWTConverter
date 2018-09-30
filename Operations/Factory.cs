@@ -8,6 +8,27 @@ namespace TestComplete
     {
         public class Factory
         {
+            private static readonly Dictionary<OperTypes, Type> operationTypes = new Dictionary<OperTypes, Type>
+            {
+                { OperTypes.Comment,          typeof(Comment) },
+                { OperTypes.CallKWT,          typeof(CallKWT) },
+                { OperTypes.Try,              typeof(Try) },
+                { OperTypes.Catch,            typeof(Catch) },
+                { OperTypes.Finally,          typeof(Finally) },
+                { OperTypes.Group,            typeof(Group) },
+                { OperTypes.SetVariable,      typeof(SetVariable) },
+                { OperTypes.If,               typeof(If) },
+                { OperTypes.LogError,         typeof(LogError) },
+                { OperTypes.Return,           typeof(Return) },
+                { OperTypes.Else,             typeof(Else) },
+                { OperTypes.Delay,            typeof(Delay) },
+                { OperTypes.For,              typeof(For) },
+                { OperTypes.DataDrivenTest,   typeof(DataDrivenTest) },
+                { OperTypes.CallScript,       typeof(CallScript) },
+                { OperTypes.AppendLogFolder,  typeof(AppendLogFolder) },
+                { OperTypes.PopLogFolder,     typeof(PopLogFolder) },
+            };
+
             public static Operation BuildOperation(XElement data)
             {
                 if (data.Attribute("Moniker") != null)
@@ -22,28 +43,9 @@ namespace TestComplete
                     XElement opData = data.Element("Data");
                     XElement children = data.Element("Children");
 
-                    var operTypeToOperation = new Dictionary<OperTypes, Operation>()
-                    {
-                        { OperTypes.Comment,          new Comment(opData, children) },
-                        { OperTypes.CallKWT,          new CallKWT(opData, children) },
-                        { OperTypes.Try,              new Try(opData, children) },
-                        { OperTypes.Catch,            new Catch(opData, children) },
-                        { OperTypes.Finally,          new Finally(opData, children) },
-                        { OperTypes.Group,            new Group(opData, children) },
-                        { OperTypes.SetVariable,      new SetVariable(opData, children) },
-                        { OperTypes.If,               new If(opData, children) },
-                        { OperTypes.LogError,         new LogError(opData, children) },
-                        { OperTypes.Return,           new Return(opData, children) },
-                        { OperTypes.Else,             new Else(opData, children) },
-                        { OperTypes.Delay,            new Delay(opData, children) },
-                        { OperTypes.For,              new For(opData, children) },
-                        { OperTypes.DataDrivenTest,   new DataDrivenTest(opData, children) },
-                        { OperTypes.CallScript,       new CallScript(opData, children) },
-                        { OperTypes.AppendLogFolder,  new AppendLogFolder(opData, children) },
-                        { OperTypes.PopLogFolder,     new PopLogFolder(opData, children) },
-                    };
-
-                    return operTypeToOperation.ContainsKey(type) ? operTypeToOperation[type] : new Operation("Unknown", type, opData, children);
+                    return operationTypes.ContainsKey(type)
+                        ? (Operation)Activator.CreateInstance(operationTypes[type], opData, children)
+                        : new Operation("Unknown", type, opData, children);
                 }
             }
         }

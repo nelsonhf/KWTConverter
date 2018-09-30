@@ -9,19 +9,10 @@ namespace TestComplete
     {
         public class CheckpointsAssertion : Operation
         {
-            private List<Parameter> m_parameters;
-
-            public IReadOnlyList<Parameter> Parameters => m_parameters.AsReadOnly();
             public string Library { get; private set; }
             public string Function { get; private set; }
             public CheckpointsAssertion(string moniker, string stringId, XElement data) : base("Assertion Checkpoint", OperTypes.CallLibrary, data, null)
             {
-                m_parameters = new List<Parameter>();
-                foreach (var p in data.Element("Parameters")?.Elements("Parameter") ?? new List<XElement>())
-                {
-                    m_parameters.Add(new Parameter(p));
-                }
-
                 // These replaces shouldn't be necessary but RegEx (in this version of .NET) seems to be buggy.
                 // stringId is "Operation: Assert True\r\nPlug-in: Assertion Checkpoint (Version: 1.0, Video Gaming Technologies, Inc.)"
                 stringId = stringId.Replace('\n', '/');
@@ -36,7 +27,7 @@ namespace TestComplete
             {
                 var result = $"{PaddedOperationName(level)}{Function}";
                 result = PadToColumn(result, ParametersColumn);
-                result += string.Join(", ", m_parameters.Select(p => p.ToString()).ToArray());
+                result += AllParameters();
                 return $"{result}\n";
             }
         }

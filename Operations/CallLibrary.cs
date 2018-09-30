@@ -19,8 +19,10 @@ namespace TestComplete
                 {
                     return new CheckpointsAssertion(moniker, stringId, data);
                 }
-
-                return null;
+                else
+                {
+                    return null;
+                }
             }
         }
     }

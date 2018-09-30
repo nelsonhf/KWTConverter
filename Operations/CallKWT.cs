@@ -22,31 +22,20 @@ namespace TestComplete
         /// </example>
         public class CallKWT : Operation
         {
-            private List<Parameter> m_parameters;
-
-            public IReadOnlyList<Parameter> Parameters => m_parameters.AsReadOnly();
             public string Name { get; private set; }
             public string Description { get; private set; }
 
             public CallKWT(XElement data, XElement children) : base("Run KWT", OperTypes.CallKWT, data, children)
             {
-                m_parameters = new List<Parameter>();
-                foreach (var p in data.Element("Parameters")?.Elements("Parameter") ?? new List<XElement>())
-                {
-                    m_parameters.Add(new Parameter(p));
-                }
-
                 Name = data.Attribute("TestName")?.Value;
-                Description = data.Attribute("DescriptionEdited")?.Value == "True"
-                    ? data.Attribute("Description")?.Value
-                    : null;
+                Description = GetDescription();
             }
 
             public override string Display(int level)
             {
                 var result = $"{PaddedOperationName(level)}{Name}";
                 result = PadToColumn(result, ParametersColumn);
-                result += string.Join(", ", m_parameters.Select(p => p.ToString()).ToArray());
+                result += AllParameters();
 
                 if (Description != null)
                 {

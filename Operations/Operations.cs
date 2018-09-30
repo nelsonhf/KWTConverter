@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace TestComplete
@@ -61,13 +62,22 @@ namespace TestComplete
             public string OperationName { get; private set; }
             public OperTypes Type { get; private set; }
             public XElement Data { get; private set; }
+            public IReadOnlyList<Parameter> Parameters => m_parameters.AsReadOnly();
             public IReadOnlyList<Operation> Children => m_children.AsReadOnly();
 
+            protected List<Parameter> m_parameters;
+
             private List<Operation> m_children;
+
             public Operation(string opName, OperTypes type, XElement data, XElement children)
             {
-                m_children = new List<Operation>();
+                m_parameters = new List<Parameter>();
+                foreach (var p in data.Element("Parameters")?.Elements("Parameter") ?? new List<XElement>())
+                {
+                    m_parameters.Add(new Parameter(p));
+                }
 
+                m_children = new List<Operation>();
                 OperationName = opName;
                 Type = type;
                 Data = data;
@@ -115,6 +125,24 @@ namespace TestComplete
                 }
 
                 return result;
+            }
+
+            protected string GetDescription()
+            {
+                return Data.Attribute("DescriptionEdited")?.Value == "True"
+                    ? Data.Attribute("Description")?.Value
+                    : null;
+            }
+
+            protected Parameter GetParameter(string name)
+            {
+                return m_parameters.FirstOrDefault(n => n.Name == name);
+            }
+
+            // Return all parameters, in the order they are defined, separated by commas
+            protected string AllParameters()
+            {
+                return string.Join(", ", m_parameters.Select(p => p.ToString()).ToArray());
             }
         }
     }
