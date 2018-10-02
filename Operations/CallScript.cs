@@ -16,7 +16,7 @@ namespace TestComplete
 
             public override string Display(int level)
             {
-                return $"{PaddedOperationName(level)}{Unit} - {TestName}\n";
+                return $"{PaddedOperationName(level)}{Unit} - {TestName} {AllParameters()}\n";
             }
         }
     }

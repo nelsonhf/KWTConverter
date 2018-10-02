@@ -33,8 +33,9 @@ namespace TestComplete
 
             var doc = XDocument.Load(input);
             // Using Null-conditional Operators (oh we fancy)
-            var variables = doc.Element("Root")?.Element("Variables")?.Element("Items")?.Elements() ?? new List<XElement>();
             var operations = doc.Element("Root")?.Element("TestData")?.Element("Children")?.Elements() ?? new List<XElement>();
+            var variables = doc.Element("Root")?.Element("Variables")?.Element("Items")?.Elements() ?? new List<XElement>();
+            var parameters = doc.Element("Root")?.Element("Parameters")?.Elements() ?? new List<XElement>();
 
             var allVars = new List<Variable>();
             foreach (var v in variables)

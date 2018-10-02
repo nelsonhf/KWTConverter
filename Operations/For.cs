@@ -22,7 +22,7 @@ namespace TestComplete
                 Parameter to = GetParameter("End Value");
                 Parameter step = GetParameter("Step");
 
-                var name = loopVariable.VarName;
+                var name = loopVariable.VariableName;
                 if (string.IsNullOrEmpty(name))
                 {
                     name = "[n/a]";

@@ -14,7 +14,7 @@ namespace TestComplete
             public readonly Dictionary<OperatorType, Type> OperatorMap = new Dictionary<OperatorType, Type>
             {
                 { OperatorType.Logical, typeof(LogicalOperator) },
-                { OperatorType.Equality, typeof(EqualityOperator) },
+                { OperatorType.Equality, typeof(ComparisonOperator) },
             };
 
             public enum OperatorType
@@ -25,13 +25,18 @@ namespace TestComplete
 
             public enum LogicalOperator
             {
+                And = 0,
                 Or = 1,
             };
 
-            public enum EqualityOperator
+            public enum ComparisonOperator
             {
                 Equals = 0,
                 DoesNotEqual = 1,
+                GreaterThan = 2,
+                GreaterThanOrEqualTo = 3,
+                LessThan = 4,
+                LessThanOrEqualTo = 5,
             };
 
             public Condition(XElement root)

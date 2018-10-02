@@ -8,23 +8,28 @@ namespace TestComplete
     public class Parameter
     {
         private const string UnknownValue = ".";
+        public string ColumnName { get; private set; }
         public string Expression { get; private set; }
         public string Name { get; private set; }
         public string ParamType { get; private set; }
         public Guid? ParamTypeGuid { get; private set; }
         public string Value { get; private set; }
-        public string VarName { get; private set; }
+        public string VariableName { get; private set; }
+        public int? VarType { get; private set; }
         public int? ValueType { get; private set; }
 
         public Parameter(XElement data)
         {
             Expression = data.Attribute("Expression")?.Value;
+            ColumnName = data.Attribute("ColumnName")?.Value;
             Name = data.Attribute("Name")?.Value;
             ParamType = data.Attribute("ParamType")?.Value;
             ParamTypeGuid = ParamType == null ? (Guid?)null : new Guid(ParamType);
             Value = data.Attribute("ValueValue")?.Value;
-            VarName = data.Attribute("VariableName")?.Value;
-            var vt = data.Attribute("ValueType")?.Value;
+            VariableName = data.Attribute("VariableName")?.Value;
+            var vt = data.Attribute("VarType")?.Value;
+            VarType = vt == null ? (int?)null : int.Parse(vt);
+            vt = data.Attribute("ValueType")?.Value;
             ValueType = vt == null ? (int?)null : int.Parse(vt);
         }
 
@@ -43,7 +48,10 @@ namespace TestComplete
                             return "LastResult";
 
                         case VarTypes.Variable:
-                            return VarName;
+                            return VariableName;
+
+                        case VarTypes.TableData:
+                            return $"Variables.{VariableName}(\"{ColumnName}\")";
 
                         default:
                             return UnknownValue;
