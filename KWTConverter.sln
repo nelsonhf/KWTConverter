@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KWTConverter", "TCReader\KWTConverter.csproj", "{99A06EA7-4434-438F-8D02-1F98108455B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Variables", "Types\Variables.csproj", "{E6F0018A-8810-46DD-8DC6-C00EC54AC652}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NamedData", "Types\NamedData.csproj", "{E6F0018A-8810-46DD-8DC6-C00EC54AC652}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Operations", "Operations\Operations.csproj", "{87A7D5C1-FA40-4E48-B3AB-1BF8664B93FC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Other", "Other\Other.csproj", "{E2E1D0E3-ACBC-46C7-AA84-64BA0314A8C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +27,11 @@ Global
 		{87A7D5C1-FA40-4E48-B3AB-1BF8664B93FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87A7D5C1-FA40-4E48-B3AB-1BF8664B93FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87A7D5C1-FA40-4E48-B3AB-1BF8664B93FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2E1D0E3-ACBC-46C7-AA84-64BA0314A8C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2E1D0E3-ACBC-46C7-AA84-64BA0314A8C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2E1D0E3-ACBC-46C7-AA84-64BA0314A8C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2E1D0E3-ACBC-46C7-AA84-64BA0314A8C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6EC4D680-AD6F-4208-93C0-1FD598BF8A4E}
 	EndGlobalSection
 EndGlobal

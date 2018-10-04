@@ -57,9 +57,9 @@
       <Project>{87A7D5C1-FA40-4E48-B3AB-1BF8664B93FC}</Project>
       <Name>Operations</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Types\Variables.csproj">
+    <ProjectReference Include="..\Types\NamedData.csproj">
       <Project>{E6F0018A-8810-46DD-8DC6-C00EC54AC652}</Project>
-      <Name>Variables</Name>
+      <Name>NamedData</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

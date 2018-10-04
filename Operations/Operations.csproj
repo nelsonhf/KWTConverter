@@ -65,13 +65,9 @@
     <Compile Include="Try.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Other\Other.csproj">
-      <Project>{E2E1D0E3-ACBC-46C7-AA84-64BA0314A8C6}</Project>
-      <Name>Other</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Types\Variables.csproj">
+    <ProjectReference Include="..\Types\NamedData.csproj">
       <Project>{E6F0018A-8810-46DD-8DC6-C00EC54AC652}</Project>
-      <Name>Variables</Name>
+      <Name>NamedData</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
