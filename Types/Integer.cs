@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace TestComplete
 {
-    namespace Variables
+    namespace NamedData
     {
         public class Integer : Variable
         {

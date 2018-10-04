@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TestComplete
 {
-    namespace Variables
+    namespace NamedData
     {
         /// <summary>
         /// Types of variable supported by TestComplete

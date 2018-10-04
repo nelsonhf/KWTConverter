@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace TestComplete
 {
-    namespace Variables
+    namespace NamedData
     {
         public class Factory
         {
@@ -36,6 +36,12 @@ namespace TestComplete
                         return null;
                         // break;
                 }
+            }
+
+            public static Parameter BuildParameter(XElement data)
+            {
+                var totalParameters = data.Elements();
+                return null;
             }
         }
     }

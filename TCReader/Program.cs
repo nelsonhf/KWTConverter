@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
 using TestComplete.Operations;
-using TestComplete.Variables;
+using TestComplete.NamedData;
 
 namespace TestComplete
 {
@@ -40,13 +40,15 @@ namespace TestComplete
             var allVars = new List<Variable>();
             foreach (var v in variables)
             {
-                allVars.Add(Variables.Factory.BuildVariable(v));
+                allVars.Add(NamedData.Factory.BuildVariable(v));
             }
 
-#if false
-            allVars.Dump();
-            variables.Dump();
-#endif
+            var allParms = new List<Parameter>();
+            foreach (var p in parameters)
+            {
+                allParms.Add(NamedData.Factory.BuildParameter(p));
+            }
+
             var program = new List<Operation>();
             string prog = string.Empty;
             foreach (var o in operations)
@@ -54,7 +56,6 @@ namespace TestComplete
                 var operation = Operations.Factory.BuildOperation(o);
                 program.Add(operation);
                 prog += operation.Display(0);
-                //// Console.WriteLine(operation.Display(0));
             }
 
             Console.WriteLine(prog);
