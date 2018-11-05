@@ -62,19 +62,19 @@ namespace TestComplete
                     return UnknownValue;
                 }
             }
-            else if (ValueType == (int)Variable.ValueType.Null)
+            else if (ValueType == (int)Variables.ValueType.Null)
             {
                 return "null";
             }
-            else if (ValueType == (int)Variable.ValueType.Integer || ValueType == (int)Variable.ValueType.Boolean)
+            else if (ValueType == (int)Variables.ValueType.Integer || ValueType == (int)Variables.ValueType.Boolean)
             {
                 return Value;
             }
-            else if (ValueType == (int)Variable.ValueType.UnicodeString)
+            else if (ValueType == (int)Variables.ValueType.UnicodeString)
             {
                 return $"\"{Table.DecodeUnicodeString(Value)}\"";
             }
-            else if (ValueType == (int)Variable.ValueType.String && !Value.StartsWith("[KeywordTests")) // "[KeywordTests.." seems to indicate a reference to a variable or array
+            else if (ValueType == (int)Variables.ValueType.String && !Value.StartsWith("[KeywordTests")) // "[KeywordTests.." seems to indicate a reference to a variable or array
             {
                 return $"\"{Value}\"";
             }

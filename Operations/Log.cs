@@ -6,11 +6,11 @@ namespace TestComplete
 {
     namespace Operations
     {
-        public class LogError : Operation
+        public class Log : Operation
         {
             public string Description { get; private set; }
             public string MessageType { get; private set; }
-            public LogError(XElement data, XElement children) : base("Log", OperTypes.LogError, data, children)
+            public Log(XElement data, XElement children) : base("Log", OperTypes.Log, data, children)
             {
                 MessageType = data.Attribute("MessageType")?.Value;
                 Description = GetDescription();

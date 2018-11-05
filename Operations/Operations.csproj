@@ -43,6 +43,7 @@
     <Compile Include="AppendLogFolder.cs" />
     <Compile Include="CallKWT.cs" />
     <Compile Include="CallLibrary.cs" />
+    <Compile Include="CallObjectMethod.cs" />
     <Compile Include="CallScript.cs" />
     <Compile Include="Catch.cs" />
     <Compile Include="CheckpointsAssertion.cs" />
@@ -53,16 +54,28 @@
     <Compile Include="Else.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="Finally.cs" />
+    <Compile Include="FindObject.cs" />
     <Compile Include="For.cs" />
+    <Compile Include="GotoLabel.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="If.cs" />
-    <Compile Include="LogError.cs" />
+    <Compile Include="ImageBasedAction.cs" />
+    <Compile Include="Label.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="MenuAction.cs" />
+    <Compile Include="OnScreenAction.cs" />
     <Compile Include="Operations.cs" />
     <Compile Include="PopLogFolder.cs" />
+    <Compile Include="ProcessAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Return.cs" />
+    <Compile Include="RunCodeSnippet.cs" />
+    <Compile Include="RunTestedApp.cs" />
+    <Compile Include="RunTestFromProject.cs" />
     <Compile Include="SetVariable.cs" />
+    <Compile Include="StopRunning.cs" />
     <Compile Include="Try.cs" />
+    <Compile Include="While.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Other\Other.csproj">
