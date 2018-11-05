@@ -24,6 +24,7 @@ namespace TestComplete
             Table,          // A table (may have multiple dimension but typically has 2; see array for one dimensional tables)
             TableData,      // One element from a table (e.g. table[0][0]), index may be integer or string
             Variable,       // Variable used in the current keyword test
+            Unknown,         // Type was not found before...
         };
 
         /// <summary>
@@ -106,6 +107,15 @@ namespace TestComplete
             public static readonly Dictionary<int, VarTypes> TypeFromNumber = new Dictionary<int, VarTypes>
             {
                 { (int)VariableType.String, VarTypes.String },
+            };
+
+            public static readonly Dictionary<int, VarTypes> VarTypeFromNumber = new Dictionary<int, VarTypes>
+            {
+                { (int)VarType.Unknown, VarTypes.Unknown },
+                { (int)VarType.Integer, VarTypes.Integer },
+                { (int)VarType.Double, VarTypes.Double },
+                { (int)VarType.String, VarTypes.String },
+                { (int)VarType.Boolean, VarTypes.Boolean },
             };
 
             public string Name { get; private set; }

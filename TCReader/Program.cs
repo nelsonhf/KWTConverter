@@ -58,6 +58,50 @@ namespace TestComplete
                 prog += operation.Display(0);
             }
 
+            var functionName = Path.GetFileNameWithoutExtension(input);
+            var functionDescription = doc.Element("Root")?.Element("TestData")?.Attribute("Description")?.Value;
+
+            Console.WriteLine("/*");
+            Console.WriteLine("This block contains data embedded in the Keyword Test file");
+            Console.WriteLine($"Function: {functionName}");
+
+            if (!string.IsNullOrWhiteSpace(functionDescription))
+            {
+                Console.WriteLine(functionDescription);
+            }
+
+            if (allParms.Count != 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Parameters:");
+                foreach (var par in allParms)
+                {
+                    Console.Write($" {par.Name} - [{Variable.VarTypeFromNumber[par.VarType ?? (int)VarType.Unknown]}]:");
+                    Console.Write(par.Optional ? $" (optional; default = {par.DefaultValue})" : "");
+                    Console.WriteLine($" {par.Description}");
+                }
+            }
+
+            if (allVars.Count != 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Variables:");
+                foreach (var v in allVars)
+                {
+                    Console.WriteLine($" {v.Name} - [{v.Type}]: {v.Description}");
+                    if (v is Table)
+                    {
+                        foreach (var line in ((Table)v).Data)
+                        {
+                            Console.WriteLine($"    |{string.Join("|", line)}|");
+                        }
+                    }
+                }
+            }
+
+            Console.WriteLine("*/");
+            Console.WriteLine();
+
             Console.WriteLine(prog);
             streamWriter.WriteLine(prog);
             streamWriter.Flush();

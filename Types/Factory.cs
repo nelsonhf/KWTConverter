@@ -40,8 +40,7 @@ namespace TestComplete
 
             public static Parameter BuildParameter(XElement data)
             {
-                var totalParameters = data.Elements();
-                return null;
+                return new Parameter(data);
             }
         }
     }
